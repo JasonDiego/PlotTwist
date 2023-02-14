@@ -1,0 +1,20 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">PlotTwist</h1>
+    <p>Wanna hear a good plot twist? Pick a movie.</p>
+</div>
+
+@foreach (var movie in Model.Movies)
+{
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">@movie.Name</h2>
+            <h5 class="card-year">(@movie.Year)</h5>
+        </div>
+    </div>
+}

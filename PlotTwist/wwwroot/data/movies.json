@@ -1,0 +1,23 @@
+[
+  {
+    "Name": "No Country For Old Men",
+    "Year": 2007,
+    "Director": [ "Ethan Coen", "Joel Coen" ],
+    "Rating": 8.2,
+    "Cast": [ "Javier Bardem", "Tommy Lee Jones", "Josh Brolin", "Woody Harrelson" ]
+  },
+  {
+    "Name": "Finding Nemo",
+    "Year": 2003,
+    "Director": [ "Andrew Stanton" ],
+    "Rating": 8.2,
+    "Cast": [ "Albert Brooks", "Alexander Gould", "Ellen DeGeneres" ]
+  },
+  {
+    "Name": "Interstellar",
+    "Year": 2014,
+    "Director": [ "Christopher Nolan" ],
+    "Rating": 8.6,
+    "Cast": [ "Matthew McConaughey", "Anne Hathaway", "Matt Damon" ]
+  }
+]
