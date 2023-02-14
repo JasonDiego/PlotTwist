@@ -1,8 +1,11 @@
-﻿namespace PlotTwist.Services
+﻿using OpenAI_API;
+
+namespace PlotTwist.Services
 {
     public class PromptService : IPromptService
     {
-        private PromptService() { }
+        public PromptService() { _api = new OpenAI_API.OpenAIAPI(); }
+        private OpenAIAPI _api;
         private static PromptService instance = null;
         public static PromptService Instance
         {
@@ -14,8 +17,6 @@
         }
         public string SendPrompt()
         {
-            var api = new OpenAI_API.OpenAIAPI();
-
             return "";
         }
     }

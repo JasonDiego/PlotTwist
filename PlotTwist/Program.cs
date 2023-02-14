@@ -1,3 +1,4 @@
+using PlotTwist.Services;
 using Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IMovieService, JsonFileMovieService>(); // scoped: one per HTTP request | transient: always a new instance
+builder.Services.AddSingleton<IPromptService, PromptService>();
 
 var app = builder.Build();
 
