@@ -12,7 +12,7 @@ namespace PlotTwist.Pages
         public readonly IPromptService _promptService;
         public IEnumerable<Movie> Movies { get; private set; }
 
-        // ILogger and IMovieService use dependency injection
+        // all parameters are injected automatically
         public IndexModel(ILogger<IndexModel> logger, IMovieService movieService, IPromptService promptService)
         {
             _logger = logger;
