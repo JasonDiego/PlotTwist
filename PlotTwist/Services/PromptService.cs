@@ -1,11 +1,12 @@
-﻿using OpenAI_API;
+﻿using Microsoft.Extensions.Options;
+using OpenAI_API;
 
 namespace PlotTwist.Services
 {
     public class PromptService : IPromptService
     {
         // constructor
-        public PromptService() { _api = new OpenAI_API.OpenAIAPI(); }
+        public PromptService() { _api = new OpenAI_API.OpenAIAPI("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"); }
 
         // internal members
         private OpenAIAPI _api;
@@ -22,10 +23,10 @@ namespace PlotTwist.Services
         }
 
         // send prompt via OpenAI API
-        public string SendPrompt()
+        public async Task<string> SendPrompt()
         {
-            // TO DO
-            return "";
+            // TODO: make prompt dynamic!
+            return await _api.Completions.GetCompletion("Tell me a joke in 5 words.");
         }
     }
 }
