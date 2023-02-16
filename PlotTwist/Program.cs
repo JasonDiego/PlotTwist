@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IMovieService, JsonFileMovieService>(); // scoped: one per HTTP request | transient: always a new instance
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -27,16 +28,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-app.MapGet("/movies", (context) =>
-{
-    using (var scope = app.Services.CreateScope())
-    {
-        // use service to read JSON file and fetch movies
-        var service = scope.ServiceProvider.GetRequiredService<IMovieService>();
-        var movies = service.GetMovies();
-        var json = JsonSerializer.Serialize<IEnumerable<Movie>>(movies);
-        return context.Response.WriteAsync(json);
-    }
-});
+app.MapControllers();
 
 app.Run();
