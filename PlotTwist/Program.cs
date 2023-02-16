@@ -1,3 +1,5 @@
+using Models;
+using System.Text.Json;
 using Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,5 +26,17 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapGet("/movies", (context) =>
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        // use service to read JSON file and fetch movies
+        var service = scope.ServiceProvider.GetRequiredService<IMovieService>();
+        var movies = service.GetMovies();
+        var json = JsonSerializer.Serialize<IEnumerable<Movie>>(movies);
+        return context.Response.WriteAsync(json);
+    }
+});
 
 app.Run();
