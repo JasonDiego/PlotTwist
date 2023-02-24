@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Models;
+using PlotTwist.Services;
 using Services;
 
 namespace PlotTwist.Pages
@@ -10,7 +11,7 @@ namespace PlotTwist.Pages
         public readonly IMovieService _movieService;
         public IEnumerable<Movie> Movies { get; private set; }
 
-        // ILogger and IMovieService use dependency injection
+        // all parameters are injected automatically
         public IndexModel(ILogger<IndexModel> logger, IMovieService movieService)
         {
             _logger = logger;
@@ -19,6 +20,7 @@ namespace PlotTwist.Pages
 
         public void OnGet()
         {
+            // read movies from JSON file
             Movies = _movieService.GetMovies();
         }
     }

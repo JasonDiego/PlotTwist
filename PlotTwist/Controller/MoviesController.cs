@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Models;
+using PlotTwist.Services;
 using Services;
 
 namespace PlotTwist.Controller
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class MoviesController : ControllerBase
     {
@@ -17,10 +18,18 @@ namespace PlotTwist.Controller
         public IMovieService MovieService { get; }
         public ILogger<MoviesController> Logger;
 
+        // .../api/movies
         [HttpGet]
         public IEnumerable<Movie> Get()
         {
             return MovieService.GetMovies();
+        }
+
+        // .../api/movies/{id}
+        [HttpGet("{id}")]
+        public string Get([FromRoute] int id)
+        {
+            return $"Movie #{id}";
         }
     }
 }
