@@ -11,11 +11,10 @@ namespace PlotTwist.Services
         // internal members
         private OpenAIAPI _api;
 
-        // send prompt via OpenAI API
-        public async Task<string> SendPrompt()
+        // send string prompt via OpenAI API
+        public async Task<string> SendPrompt(string prompt)
         {
-            // TODO: make prompt dynamic!
-            return await _api.Completions.GetCompletion("Tell me a joke in a few words.");
+            return await _api.Completions.GetCompletion(prompt);
         }
     }
 }
