@@ -41,10 +41,16 @@ namespace Services
 
         public IEnumerable<Movie> GetMovies()
         {
+            Console.WriteLine("\n\nMovie List:");
             foreach(var movie in Movies) { Console.WriteLine(movie.Key + ": " + movie.Value); }
             return Movies.Values;
         }
 
-
+        public Movie? GetMovieById(int id)
+        {
+            if (Movies.ContainsKey(id))
+                return Movies[id];
+            else return null;
+        }
     }
 }

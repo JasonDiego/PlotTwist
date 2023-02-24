@@ -6,5 +6,6 @@ namespace Services
     public interface IMovieService
     {
         public IEnumerable<Movie> GetMovies();
+        public Movie? GetMovieById(int id);
     }
 }

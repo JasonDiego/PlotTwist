@@ -29,7 +29,9 @@ namespace PlotTwist.Controller
         [HttpGet("{id}")]
         public string Get([FromRoute] int id)
         {
-            return $"Movie #{id}";
+            Movie movie = MovieService.GetMovieById(id);
+            if (movie == null) return $"Movie #{id} not found!";
+            return movie.ToString();
         }
     }
 }
