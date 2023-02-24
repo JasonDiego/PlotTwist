@@ -5,35 +5,31 @@ using Services;
 
 namespace PlotTwist.Controller
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class MoviesController : ControllerBase
     {
-        public MoviesController(ILogger<MoviesController> logger, IMovieService movieService, IPromptService promptService)
+        public MoviesController(ILogger<MoviesController> logger, IMovieService movieService)
         {
-            PromptService = promptService;
             MovieService = movieService;
             Logger = logger;
         }
 
-        public IPromptService PromptService { get; }
         public IMovieService MovieService { get; }
         public ILogger<MoviesController> Logger;
 
-        [Route("/movies")]
+        // .../api/movies
         [HttpGet]
         public IEnumerable<Movie> Get()
         {
             return MovieService.GetMovies();
         }
 
-        [Route("/movies/{id}")]
-        [HttpGet]
-        public string GetAsync([FromRoute] int id)
+        // .../api/movies/{id}
+        [HttpGet("{id}")]
+        public string Get([FromRoute] int id)
         {
-            string response = Task.Run(() => PromptService.SendPrompt()).Result;
-            
-            return response;
+            return $"Movie #{id}";
         }
     }
 }
