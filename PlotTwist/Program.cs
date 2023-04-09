@@ -8,11 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var settings = builder.Configuration.GetSection("OpenAISettings").Get<OpenAISettings>();
+var apiKey = builder.Configuration.GetValue<string>("OpenAISettings:APIKey");
 
 // scoped: one per HTTP request | transient: always a new instance
 builder.Services.AddScoped<IMovieService, JsonFileMovieService>();
-builder.Services.AddScoped<IPromptService>(x => ActivatorUtilities.CreateInstance<PromptService>(x, settings.APIKey));
+builder.Services.AddScoped<IPromptService>(x => ActivatorUtilities.CreateInstance<PromptService>(x, apiKey));
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 
