@@ -10,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var apiKey = builder.Configuration.GetValue<string>("OpenAISettings:APIKey");
 
+// Enable dependency injection for OpenAISettings and validate
+builder.Services.AddOptions<OpenAISettings>().Bind(builder.Configuration.GetSection("OpenAISettings")).ValidateDataAnnotations();
+
 // scoped: one per HTTP request | transient: always a new instance
 builder.Services.AddScoped<IMovieService, JsonFileMovieService>();
 builder.Services.AddScoped<IPromptService>(x => ActivatorUtilities.CreateInstance<PromptService>(x, apiKey));
