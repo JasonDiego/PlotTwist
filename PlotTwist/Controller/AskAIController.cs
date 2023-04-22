@@ -29,8 +29,8 @@ namespace PlotTwist.Controller
         [HttpGet]
         public string GetAsync()
         {
-            string response = Task.Run(() => PromptService.SendPrompt("Give me an enthusiastic 'Hello, World' message.")).Result;
-            return response;
+            string response = Task.Run(() => PromptService.SendDefaultPrompt()).Result;
+            return "Hi, I'm PlotTwistAI. Don't you think plot twists are" + response + "?";
         }
     }
 }

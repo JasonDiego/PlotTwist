@@ -16,5 +16,16 @@ namespace PlotTwist.Services
         {
             return await _api.Completions.GetCompletion(prompt);
         }
+
+        // send test prompt via OpenAI API
+        public async Task<string> SendDefaultPrompt()
+        {
+            return await _api.Completions.GetCompletion(
+                "I love watching movies." +
+                "I really love exciting plot twists." +
+                "Sometimes, I like to make up fictional plot twists for movies that I like." +
+                "Don't you think plot twists are"
+            );
+        }
     }
 }
