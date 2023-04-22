@@ -37,7 +37,7 @@ namespace Services
         }
 
         public IWebHostEnvironment WebHostEnvironment { get; }
-        public Dictionary<int, Movie> Movies = new Dictionary<int, Movie>();
+        public Dictionary<int, Movie> Movies = new Dictionary<int, Movie>(); // 1-index based
 
         public IEnumerable<Movie> GetMovies()
         {

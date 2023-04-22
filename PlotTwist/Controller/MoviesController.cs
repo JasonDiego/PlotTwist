@@ -9,12 +9,14 @@ namespace PlotTwist.Controller
     [ApiController]
     public class MoviesController : ControllerBase
     {
-        public MoviesController(ILogger<MoviesController> logger, IMovieService movieService)
+        public MoviesController(ILogger<MoviesController> logger, IMovieService movieService, IPromptService promptService)
         {
+            PromptService = promptService;
             MovieService = movieService;
             Logger = logger;
         }
-
+        
+        public IPromptService PromptService { get; }
         public IMovieService MovieService { get; }
         public ILogger<MoviesController> Logger;
 
@@ -29,9 +31,20 @@ namespace PlotTwist.Controller
         [HttpGet("{id}")]
         public string Get([FromRoute] int id)
         {
-            Movie movie = MovieService.GetMovieById(id);
-            if (movie == null) return $"Movie #{id} not found!";
-            return movie.ToString();
+            if (id < 1)
+                return "Invalid movie ID! Please populate 'id' field with a number between 1 - "
+                    + MovieService.GetMovies().Count().ToString();
+
+            Movie? movie = MovieService.GetMovieById(id);
+
+            if (movie == null)
+                return $"Movie #{id} not found!";
+
+            string response = Task.Run(() => PromptService.SendPrompt(
+                "Give me a plot twist for the " + movie.Year + " film: " + movie.Name
+            )).Result;
+
+            return response;
         }
     }
 }
